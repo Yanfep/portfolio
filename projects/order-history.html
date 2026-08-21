@@ -12,39 +12,50 @@
 
   <style>
     /* Estilos propios de las páginas de case study */
-    .cs-header { padding: 6rem var(--gutter) 3rem; max-width: var(--max); margin: 0 auto; }
-    .cs-header .label { margin-bottom: 1.5rem; }
+    :root {
+      --cs-green: #17301f;
+      --cs-tan: #d8cdb8;
+    }
+
+    body { cursor: auto; }
+
+    .cs-nav { position: static; mix-blend-mode: normal; color: var(--ink); padding: 2rem var(--gutter); }
+
+    .cs-header { padding: 3rem var(--gutter) 4rem; max-width: var(--max); margin: 0 auto; }
+    .cs-header .label { margin-bottom: 2rem; }
     .cs-header h1 {
       font-family: var(--font-display);
       font-weight: 300;
       font-style: italic;
       font-size: clamp(2.5rem, 7vw, 5rem);
       letter-spacing: -0.03em;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
-    .cs-meta { display: flex; gap: 3rem; margin-bottom: 2rem; font-size: 0.8rem; }
+    .cs-meta { display: flex; gap: 3rem; margin-bottom: 2.5rem; font-size: 0.8rem; }
     .cs-meta div span { display: block; }
-    .cs-meta .meta-label { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; }
-    .cs-intro { max-width: 60ch; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; }
+    .cs-meta .meta-label { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; margin-bottom: 0.35rem; }
+    .cs-intro { max-width: 62ch; color: var(--ink-soft); font-size: 1.1rem; line-height: 1.65; }
 
-    .cs-section { padding: 5rem var(--gutter); max-width: var(--max); margin: 0 auto; }
-    .cs-section--tinted { background: var(--bg-soft); max-width: none; }
-    .cs-section--tinted > .cs-inner { max-width: var(--max); margin: 0 auto; }
+    .cs-section { padding: 6rem var(--gutter); }
+    .cs-section--tinted { background: var(--bg-soft); }
+    .cs-inner { max-width: var(--max); margin: 0 auto; }
     .cs-section h2 {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
       letter-spacing: -0.02em;
-      margin: 1rem 0 1.5rem;
-      max-width: 22ch;
+      line-height: 1.1;
+      margin: 1.25rem 0 1.75rem;
+      max-width: 24ch;
     }
-    .cs-section p { color: var(--ink-soft); max-width: 60ch; line-height: 1.65; }
+    .cs-section > .cs-inner > p,
+    .cs-section > p { color: var(--ink-soft); max-width: 62ch; line-height: 1.7; }
 
     .cs-image {
-      margin: 2.5rem 0;
+      margin: 3rem 0 1.5rem;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--bg-soft);
+      border-radius: 10px;
+      background: var(--bg);
       aspect-ratio: 16 / 10;
       display: flex;
       align-items: center;
@@ -54,24 +65,73 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       text-align: center;
+      padding: 1rem;
     }
-    .cs-image-caption { text-align: center; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-top: 1rem; }
+    .cs-image-caption {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--ink);
+      margin-top: 0.5rem;
+    }
+    .cs-caption-text {
+      text-align: center;
+      margin: 0.75rem auto 0;
+      max-width: 50ch;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
 
-    .cs-tasks { list-style: none; margin-top: 2rem; display: grid; gap: 1rem; max-width: 60ch; }
+    .cs-task-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      margin-top: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .cs-task-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .cs-tasks { list-style: none; display: grid; gap: 0; }
     .cs-tasks li {
-      display: flex; gap: 1rem;
-      padding: 1.25rem 0;
+      display: flex; gap: 1.25rem;
+      padding: 1.5rem 0;
       border-bottom: 1px solid var(--line);
     }
+    .cs-tasks li:first-child { border-top: 1px solid var(--line); }
     .cs-tasks .num { font-size: 0.8rem; color: var(--ink-mute); flex-shrink: 0; padding-top: 0.15rem; }
-    .cs-tasks strong { display: block; }
-    .cs-tasks .sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.25rem; }
+    .cs-tasks strong { display: block; font-weight: 500; }
+    .cs-tasks .sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.3rem; line-height: 1.4; }
+
+    .cs-constraints {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .cs-constraints h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .cs-constraint { margin-bottom: 1.75rem; }
+    .cs-constraint:last-child { margin-bottom: 0; }
+    .cs-constraint .num { font-size: 0.8rem; color: var(--ink-mute); display: block; margin-bottom: 0.5rem; }
+    .cs-constraint strong { display: block; font-weight: 500; margin-bottom: 0.5rem; }
+    .cs-constraint .insight {
+      font-size: 0.85rem;
+      color: var(--accent);
+      line-height: 1.5;
+    }
 
     .cs-results {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 2.5rem;
+      gap: 2.5rem;
+      margin-top: 3rem;
       border-top: 1px solid var(--line);
       padding-top: 2.5rem;
     }
@@ -81,38 +141,64 @@
       font-size: clamp(2rem, 4vw, 3rem);
       display: block;
       color: var(--accent);
+      line-height: 1;
     }
-    .cs-results p { margin-top: 0.75rem; font-size: 0.85rem; }
-    @media (max-width: 768px) { .cs-results { grid-template-columns: 1fr; } }
+    .cs-results p { margin-top: 0.85rem; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; max-width: 28ch; }
+    @media (max-width: 768px) { .cs-results { grid-template-columns: 1fr; gap: 2rem; } }
 
-    .cs-phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
-    .cs-phones figcaption { text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--ink-soft); }
-    @media (max-width: 768px) { .cs-phones { grid-template-columns: 1fr; } }
+    .cs-phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+    .cs-phones .cs-image { aspect-ratio: 3/5.2; margin-bottom: 0; }
+    .cs-phones figcaption { text-align: center; margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.05em; color: var(--ink-soft); }
+    @media (max-width: 768px) { .cs-phones { grid-template-columns: 1fr; max-width: 280px; margin-inline: auto; } }
 
-    .cs-nav-back { position: static; mix-blend-mode: normal; color: var(--ink); }
+    .cs-contact {
+      background: var(--cs-green);
+      color: var(--bg);
+      padding: 7rem var(--gutter);
+      text-align: center;
+    }
+    .cs-contact .label { color: rgba(243,237,226,0.6); justify-content: center; }
+    .cs-contact .label::before { background: var(--accent); }
+    .cs-contact h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      max-width: 20ch;
+      margin: 1.5rem auto 2rem;
+      line-height: 1.2;
+    }
+    .cs-contact p { font-size: 0.9rem; color: rgba(243,237,226,0.75); }
+    .cs-contact a { border-bottom: 1px solid rgba(243,237,226,0.4); }
 
     .cs-next {
-      background: var(--ink);
-      color: var(--bg);
-      padding: 4rem var(--gutter);
+      background: var(--cs-tan);
+      padding: 5rem var(--gutter);
       text-align: right;
     }
-    .cs-next .label { color: var(--bg-soft); justify-content: flex-end; }
+    .cs-next .label { justify-content: flex-end; }
     .cs-next a {
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 300;
-      font-size: clamp(2rem, 6vw, 4rem);
+      font-size: clamp(2.2rem, 6vw, 4rem);
       display: inline-flex;
       align-items: center;
       gap: 1.5rem;
       margin-top: 1rem;
     }
+
+    .cs-footer {
+      padding: 2rem var(--gutter);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-mute);
+    }
   </style>
 </head>
 <body>
 
-  <header class="nav cs-nav-back">
+  <header class="nav cs-nav">
     <a href="../index.html" class="nav__logo">← Yanfe&nbsp;Pedroza</a>
   </header>
 
@@ -122,12 +208,12 @@
     <h1>Order history</h1>
 
     <div class="cs-meta">
-      <div><span class="meta-label">Year</span><span>PC1.2</span></div>
+      <div><span class="meta-label">Client</span><span>adidas</span></div>
       <div><span class="meta-label">Role</span><span>Product designer</span></div>
     </div>
 
     <p class="cs-intro">
-      Order History was just a list, but yours saw your orders, but you couldn't do anything from there. I redesigned it into a clear, self-service entry point, driving self-service returns up 22% and helping cut CS calls about existing orders by 8–10%.
+      Order History was just a list, but users could see their orders, but couldn't do anything from there. I redesigned it into a clear, self-service entry point, driving self-service returns up 22% and helping cut CS calls about existing orders by 8–10%.
     </p>
   </section>
 
@@ -142,7 +228,7 @@
 
       <div class="cs-image">[IMAGEN — captura del navegador con Order History]</div>
       <p class="cs-image-caption">Fragmented across platforms</p>
-      <p style="text-align:center; margin: 0 auto;">
+      <p class="cs-caption-text">
         Each platform evolved independently, creating inconsistent patterns, information hierarchy and available actions.
       </p>
     </div>
@@ -150,30 +236,48 @@
 
   <!-- Tarea -->
   <section class="cs-section">
-    <span class="label">Task</span>
-    <h2>Transform Order History into the foundation of adidas's entire post-sales self service.</h2>
-    <p>
-      Redesign Order History into a self-service entry point that lets users take action directly, reducing the need to contact CS.
-    </p>
+    <div class="cs-inner">
+      <span class="label">Task</span>
+      <h2>Transform Order History into the foundation of adidas's entire post-sales self service.</h2>
+      <p>
+        Redesign Order History into a self-service entry point that lets users take action directly, reducing the need to contact CS.
+      </p>
 
-    <ul class="cs-tasks">
-      <li>
-        <span class="num">01</span>
-        <div><strong>Track an existing order</strong><span class="sub">Delivery date and status, front and center.</span></div>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <div><strong>Modify or cancel an order</strong><span class="sub">Self-service before it ships.</span></div>
-      </li>
-      <li>
-        <span class="num">03</span>
-        <div><strong>Find information about previous orders</strong><span class="sub">Status, details, refund, return, without contact.</span></div>
-      </li>
-      <li>
-        <span class="num">04</span>
-        <div><strong>Initiate a return or exchange</strong><span class="sub">Highest-friction action, most common future need.</span></div>
-      </li>
-    </ul>
+      <div class="cs-task-grid">
+        <ul class="cs-tasks">
+          <li>
+            <span class="num">01</span>
+            <div><strong>Track an existing order</strong><span class="sub">Delivery date and status, front and center.</span></div>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <div><strong>Modify or cancel an order</strong><span class="sub">Self-service before it ships.</span></div>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <div><strong>Find information about previous orders</strong><span class="sub">Status, details, refund, return, without contact.</span></div>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <div><strong>Initiate a return or exchange</strong><span class="sub">Highest-friction action, most common future need.</span></div>
+          </li>
+        </ul>
+
+        <div class="cs-constraints">
+          <h3>Two constraints from day one</h3>
+          <div class="cs-constraint">
+            <span class="num">01</span>
+            <strong>Phased delivery</strong>
+            <p class="insight">Engineering couldn't build everything at once → Led to a modular, state-driven component model.</p>
+          </div>
+          <div class="cs-constraint">
+            <span class="num">02</span>
+            <strong>No behavioral data</strong>
+            <p class="insight">Without real data on user behavior, every design decision would be self-key → Led to research-first, principle-led decision making.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Acciones -->
@@ -192,49 +296,49 @@
 
   <!-- Resultados -->
   <section class="cs-section">
-    <span class="label">Results &amp; Outcome</span>
-    <h2>8–10% Reduction in post-sales customer contacts (CTO)</h2>
-    <p>
-      Customers could finally take action on their own instead of calling for help. Making the return option easier to find drove self-service returns up 22%, with people who could see the action they needed right away, they completed it themselves.
-    </p>
-    <p>
-      The same design shipped across web, mobile web, and app, so every customer got the same experience regardless of platform. One solution, used in three places, helped more customers solve their own problems.
-    </p>
+    <div class="cs-inner">
+      <span class="label">Results &amp; Outcome</span>
+      <h2>8–10% Reduction in post-sales customer contacts (CTO)</h2>
+      <p>
+        Customers could finally take action on their own instead of calling for help. Making the return option easier to find drove self-service returns up 22%, so people who could see the action they needed right away completed it themselves.
+      </p>
+      <p style="margin-top: 1.25rem;">
+        The same design shipped across web, mobile web, and app, so every customer got the same experience regardless of platform. One solution, used in three places, helped more customers solve their own problems.
+      </p>
 
-    <div class="cs-results">
-      <div><strong>+22%</strong><p>Returns completed via self-service at the surfacing the action at the level.</p></div>
-      <div><strong>↑</strong><p>Improved discoverability of prior post-sales actions across platforms.</p></div>
-      <div><strong>3</strong><p>Platforms left unified and became stripping the same system.</p></div>
-    </div>
+      <div class="cs-results">
+        <div><strong>+22%</strong><p>Returns redirected to self-service by surfacing the action at the right level.</p></div>
+        <div><strong>↑</strong><p>Improved discoverability of post-sales actions across platforms.</p></div>
+        <div><strong>3</strong><p>Platforms unified, now sharing the same system.</p></div>
+      </div>
 
-    <div class="cs-phones">
-      <figure>
-        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — Webmobile]</div>
-        <figcaption>Webmobile</figcaption>
-      </figure>
-      <figure>
-        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — Confirmed]</div>
-        <figcaption>Confirmed</figcaption>
-      </figure>
-      <figure>
-        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — App]</div>
-        <figcaption>App</figcaption>
-      </figure>
+      <div class="cs-phones">
+        <figure>
+          <div class="cs-image">[IMAGEN — Webmobile]</div>
+          <figcaption>Webmobile</figcaption>
+        </figure>
+        <figure>
+          <div class="cs-image">[IMAGEN — Confirmed]</div>
+          <figcaption>Confirmed</figcaption>
+        </figure>
+        <figure>
+          <div class="cs-image">[IMAGEN — App]</div>
+          <figcaption>App</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <!-- Contacto -->
-  <section id="contact" class="contact" style="background: var(--ink); color: var(--bg);">
-    <p class="contact__lede" style="color: var(--bg-soft);">— Contact</p>
-    <a href="mailto:yanfepedroza@gmail.com" class="contact__cta" data-hover>
-      Book a call to see more about this project
-    </a>
-    <p class="contact__sub" style="color: var(--bg-soft);">
-      <a href="mailto:yanfepedroza@gmail.com" data-hover>yanfepedroza@gmail.com</a>
+  <section class="cs-contact">
+    <span class="label">Contact</span>
+    <h2>Book a call to see more about this project</h2>
+    <p>
+      <a href="mailto:yanfepedroza@gmail.com">yanfepedroza@gmail.com</a>
       &nbsp;·&nbsp;
-      <a href="https://linkedin.com/in/yanfepedroza" target="_blank" rel="noopener" data-hover>LinkedIn</a>
+      <a href="https://linkedin.com/in/yanfepedroza" target="_blank" rel="noopener">LinkedIn</a>
       &nbsp;·&nbsp;
-      <a href="tel:+34685506445" data-hover>+34 685 50 64 45</a>
+      <a href="tel:+34685506445">+34 685 50 64 45</a>
     </p>
   </section>
 
@@ -244,8 +348,8 @@
     <a href="adirun.html">adiRun →</a>
   </div>
 
-  <footer class="footer">
-    <span>© 2026 — Yanfe Pedroza. All rights reserved.</span>
+  <footer class="cs-footer">
+    © 2026 — Yanfe Pedroza. All rights reserved.
   </footer>
 
 </body>
