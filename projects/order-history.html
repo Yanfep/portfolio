@@ -9,19 +9,244 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    /* Estilos propios de las páginas de case study */
+    .cs-header { padding: 6rem var(--gutter) 3rem; max-width: var(--max); margin: 0 auto; }
+    .cs-header .label { margin-bottom: 1.5rem; }
+    .cs-header h1 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+    .cs-meta { display: flex; gap: 3rem; margin-bottom: 2rem; font-size: 0.8rem; }
+    .cs-meta div span { display: block; }
+    .cs-meta .meta-label { color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; }
+    .cs-intro { max-width: 60ch; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; }
+
+    .cs-section { padding: 5rem var(--gutter); max-width: var(--max); margin: 0 auto; }
+    .cs-section--tinted { background: var(--bg-soft); max-width: none; }
+    .cs-section--tinted > .cs-inner { max-width: var(--max); margin: 0 auto; }
+    .cs-section h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      margin: 1rem 0 1.5rem;
+      max-width: 22ch;
+    }
+    .cs-section p { color: var(--ink-soft); max-width: 60ch; line-height: 1.65; }
+
+    .cs-image {
+      margin: 2.5rem 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-mute);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .cs-image-caption { text-align: center; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-top: 1rem; }
+
+    .cs-tasks { list-style: none; margin-top: 2rem; display: grid; gap: 1rem; max-width: 60ch; }
+    .cs-tasks li {
+      display: flex; gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-tasks .num { font-size: 0.8rem; color: var(--ink-mute); flex-shrink: 0; padding-top: 0.15rem; }
+    .cs-tasks strong { display: block; }
+    .cs-tasks .sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.25rem; }
+
+    .cs-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--line);
+      padding-top: 2.5rem;
+    }
+    .cs-results strong {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      display: block;
+      color: var(--accent);
+    }
+    .cs-results p { margin-top: 0.75rem; font-size: 0.85rem; }
+    @media (max-width: 768px) { .cs-results { grid-template-columns: 1fr; } }
+
+    .cs-phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
+    .cs-phones figcaption { text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--ink-soft); }
+    @media (max-width: 768px) { .cs-phones { grid-template-columns: 1fr; } }
+
+    .cs-nav-back { position: static; mix-blend-mode: normal; color: var(--ink); }
+
+    .cs-next {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 4rem var(--gutter);
+      text-align: right;
+    }
+    .cs-next .label { color: var(--bg-soft); justify-content: flex-end; }
+    .cs-next a {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2rem, 6vw, 4rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
-  <header class="nav" style="position: static; mix-blend-mode: normal; color: var(--ink);">
+  <header class="nav cs-nav-back">
     <a href="../index.html" class="nav__logo">← Yanfe&nbsp;Pedroza</a>
   </header>
 
-  <section class="container" style="padding-top: 6rem;">
-    <h1 class="section__title">Order <em>History</em></h1>
-    <p style="margin-top: 2rem; color: var(--ink-soft); max-width: 60ch;">
-      Aquí va el contenido del case study.
+  <!-- Cabecera del case study -->
+  <section class="cs-header">
+    <span class="label">Case Study · adidas</span>
+    <h1>Order history</h1>
+
+    <div class="cs-meta">
+      <div><span class="meta-label">Year</span><span>PC1.2</span></div>
+      <div><span class="meta-label">Role</span><span>Product designer</span></div>
+    </div>
+
+    <p class="cs-intro">
+      Order History was just a list, but yours saw your orders, but you couldn't do anything from there. I redesigned it into a clear, self-service entry point, driving self-service returns up 22% and helping cut CS calls about existing orders by 8–10%.
     </p>
   </section>
+
+  <!-- Situación y problema -->
+  <section class="cs-section cs-section--tinted">
+    <div class="cs-inner">
+      <span class="label">Situation &amp; Problem</span>
+      <h2>7 million visits. 64% still called support.</h2>
+      <p>
+        Order History was one of adidas's highest-traffic post-sales entry points, yet most users couldn't resolve their needs independently, and the most critical information was buried.
+      </p>
+
+      <div class="cs-image">[IMAGEN — captura del navegador con Order History]</div>
+      <p class="cs-image-caption">Fragmented across platforms</p>
+      <p style="text-align:center; margin: 0 auto;">
+        Each platform evolved independently, creating inconsistent patterns, information hierarchy and available actions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tarea -->
+  <section class="cs-section">
+    <span class="label">Task</span>
+    <h2>Transform Order History into the foundation of adidas's entire post-sales self service.</h2>
+    <p>
+      Redesign Order History into a self-service entry point that lets users take action directly, reducing the need to contact CS.
+    </p>
+
+    <ul class="cs-tasks">
+      <li>
+        <span class="num">01</span>
+        <div><strong>Track an existing order</strong><span class="sub">Delivery date and status, front and center.</span></div>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <div><strong>Modify or cancel an order</strong><span class="sub">Self-service before it ships.</span></div>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <div><strong>Find information about previous orders</strong><span class="sub">Status, details, refund, return, without contact.</span></div>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <div><strong>Initiate a return or exchange</strong><span class="sub">Highest-friction action, most common future need.</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Acciones -->
+  <section class="cs-section cs-section--tinted">
+    <div class="cs-inner">
+      <span class="label">Actions</span>
+      <h2>A modular card. Three zones. One system.</h2>
+      <p>
+        I introduced a modular card structure (When / What / Action) with state-driven CTAs and a color-coded urgency system, mapping every design decision to a specific research finding.
+      </p>
+
+      <div class="cs-image">[IMAGEN — online card drop, 3 zonas]</div>
+      <p class="cs-image-caption">Online card drop</p>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="cs-section">
+    <span class="label">Results &amp; Outcome</span>
+    <h2>8–10% Reduction in post-sales customer contacts (CTO)</h2>
+    <p>
+      Customers could finally take action on their own instead of calling for help. Making the return option easier to find drove self-service returns up 22%, with people who could see the action they needed right away, they completed it themselves.
+    </p>
+    <p>
+      The same design shipped across web, mobile web, and app, so every customer got the same experience regardless of platform. One solution, used in three places, helped more customers solve their own problems.
+    </p>
+
+    <div class="cs-results">
+      <div><strong>+22%</strong><p>Returns completed via self-service at the surfacing the action at the level.</p></div>
+      <div><strong>↑</strong><p>Improved discoverability of prior post-sales actions across platforms.</p></div>
+      <div><strong>3</strong><p>Platforms left unified and became stripping the same system.</p></div>
+    </div>
+
+    <div class="cs-phones">
+      <figure>
+        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — Webmobile]</div>
+        <figcaption>Webmobile</figcaption>
+      </figure>
+      <figure>
+        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — Confirmed]</div>
+        <figcaption>Confirmed</figcaption>
+      </figure>
+      <figure>
+        <div class="cs-image" style="aspect-ratio: 3/5;">[IMAGEN — App]</div>
+        <figcaption>App</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contact" class="contact" style="background: var(--ink); color: var(--bg);">
+    <p class="contact__lede" style="color: var(--bg-soft);">— Contact</p>
+    <a href="mailto:yanfepedroza@gmail.com" class="contact__cta" data-hover>
+      Book a call to see more about this project
+    </a>
+    <p class="contact__sub" style="color: var(--bg-soft);">
+      <a href="mailto:yanfepedroza@gmail.com" data-hover>yanfepedroza@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/yanfepedroza" target="_blank" rel="noopener" data-hover>LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="tel:+34685506445" data-hover>+34 685 50 64 45</a>
+    </p>
+  </section>
+
+  <!-- Siguiente proyecto -->
+  <div class="cs-next">
+    <span class="label">Next project</span>
+    <a href="adirun.html">adiRun →</a>
+  </div>
+
+  <footer class="footer">
+    <span>© 2026 — Yanfe Pedroza. All rights reserved.</span>
+  </footer>
 
 </body>
 </html>
